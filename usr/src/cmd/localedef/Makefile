@@ -46,11 +46,11 @@ YFLAGS		= -d -b parser
 CLEANFILES	= $(NOBJS) $(OBJS) parser.tab.c parser.tab.h
 CLEANFILES	+= \
 		UTF-8.cm UTF-8.ct \
-		8859-1.cm 8859-2.cm 8859-3.cm 8859-4.cm \
-		8859-5.cm 8859-5.cm 8859-6.cm 8859-7.cm \
-		8859-8.cm 8859-9.cm 8859-9.cm 8859-10.cm \
-		8859-11.cm 8859-13.cm 8859-14.cm 8859-15.cm \
-		8859-16.cm \
+		ISO8859-1.cm ISO8859-2.cm ISO8859-3.cm ISO8859-4.cm \
+		ISO8859-5.cm ISO8859-5.cm ISO8859-6.cm ISO8859-7.cm \
+		ISO8859-8.cm ISO8859-9.cm ISO8859-9.cm ISO8859-10.cm \
+		ISO8859-11.cm ISO8859-13.cm ISO8859-14.cm ISO8859-15.cm \
+		ISO8859-16.cm \
 		KOI8-R.cm
 CLOBBERFILES	= $(PROG) $(NPROG) $(POFILE) \
 		GB18030.cm UTF-8.cm
@@ -327,34 +327,34 @@ locale/%.UTF-8/stamp:		data/%.UTF-8.src UTF-8.cm \
 		./$(NPROG) -U -w data/widths.txt -f UTF-8.cm $(@D)
 	$(TOUCH) $@
 # Convert EURO_SIGN to CURRENCY_SIGN for the ISO8859-1 locales
-locale/%.ISO8859-1/stamp:	data/%.UTF-8.src 8859-1.cm locale $(NPROG)
+locale/%.ISO8859-1/stamp:	data/%.UTF-8.src ISO8859-1.cm locale $(NPROG)
 	sed 's/EURO_SIGN/CURRENCY_SIGN/' $< > $<.tmp
-	./$(NPROG) -U -w data/widths.txt -i $<.tmp -f 8859-1.cm $(@D)
+	./$(NPROG) -U -w data/widths.txt -i $<.tmp -f ISO8859-1.cm $(@D)
 	rm -f $<.tmp
 	$(TOUCH) $@
-locale/%.ISO8859-2/stamp:	data/%.UTF-8.src 8859-2.cm locale $(NPROG)
-	./$(NPROG) -U -w data/widths.txt -i $< -f 8859-2.cm $(@D)
+locale/%.ISO8859-2/stamp:	data/%.UTF-8.src ISO8859-2.cm locale $(NPROG)
+	./$(NPROG) -U -w data/widths.txt -i $< -f ISO8859-2.cm $(@D)
 	$(TOUCH) $@
-locale/%.ISO8859-5/stamp:	data/%.UTF-8.src 8859-5.cm locale $(NPROG)
-	./$(NPROG) -U -w data/widths.txt -i $< -f 8859-5.cm $(@D)
+locale/%.ISO8859-5/stamp:	data/%.UTF-8.src ISO8859-5.cm locale $(NPROG)
+	./$(NPROG) -U -w data/widths.txt -i $< -f ISO8859-5.cm $(@D)
 	$(TOUCH) $@
-locale/%.ISO8859-7/stamp:	data/%.UTF-8.src 8859-7.cm locale $(NPROG)
-	./$(NPROG) -U -w data/widths.txt -i $< -f 8859-7.cm $(@D)
+locale/%.ISO8859-7/stamp:	data/%.UTF-8.src ISO8859-7.cm locale $(NPROG)
+	./$(NPROG) -U -w data/widths.txt -i $< -f ISO8859-7.cm $(@D)
 	$(TOUCH) $@
-locale/%.ISO8859-6/stamp:	data/%.UTF-8.src 8859-6.cm locale $(NPROG)
-	./$(NPROG) -U -w data/widths.txt -i $< -f 8859-6.cm $(@D)
+locale/%.ISO8859-6/stamp:	data/%.UTF-8.src ISO8859-6.cm locale $(NPROG)
+	./$(NPROG) -U -w data/widths.txt -i $< -f ISO8859-6.cm $(@D)
 	$(TOUCH) $@
-locale/%.ISO8859-9/stamp:	data/%.UTF-8.src 8859-9.cm locale $(NPROG)
-	./$(NPROG) -U -w data/widths.txt -i $< -f 8859-9.cm $(@D)
+locale/%.ISO8859-9/stamp:	data/%.UTF-8.src ISO8859-9.cm locale $(NPROG)
+	./$(NPROG) -U -w data/widths.txt -i $< -f ISO8859-9.cm $(@D)
 	$(TOUCH) $@
-locale/%.ISO8859-11/stamp:	data/%.UTF-8.src 8859-11.cm locale $(NPROG)
-	./$(NPROG) -U -w data/widths.txt -i $< -f 8859-11.cm $(@D)
+locale/%.ISO8859-11/stamp:	data/%.UTF-8.src ISO8859-11.cm locale $(NPROG)
+	./$(NPROG) -U -w data/widths.txt -i $< -f ISO8859-11.cm $(@D)
 	$(TOUCH) $@
-locale/%.ISO8859-13/stamp:	data/%.UTF-8.src 8859-13.cm locale $(NPROG)
-	./$(NPROG) -U -w data/widths.txt -i $< -f 8859-13.cm $(@D)
+locale/%.ISO8859-13/stamp:	data/%.UTF-8.src ISO8859-13.cm locale $(NPROG)
+	./$(NPROG) -U -w data/widths.txt -i $< -f ISO8859-13.cm $(@D)
 	$(TOUCH) $@
-locale/%.ISO8859-15/stamp:	data/%.UTF-8.src 8859-15.cm locale $(NPROG)
-	./$(NPROG) -U -w data/widths.txt -i $< -f 8859-15.cm $(@D)
+locale/%.ISO8859-15/stamp:	data/%.UTF-8.src ISO8859-15.cm locale $(NPROG)
+	./$(NPROG) -U -w data/widths.txt -i $< -f ISO8859-15.cm $(@D)
 	$(TOUCH) $@
 locale/%.KOI8-R/stamp:		data/%.UTF-8.src KOI8-R.cm locale $(NPROG)
 	./$(NPROG) -U -w data/widths.txt -i $< -f KOI8-R.cm $(@D)
@@ -381,7 +381,8 @@ GB18030.cm: data/GB18030.cm
 
 %.cm: data/%.TXT UTF-8.cm
 	$(RM) $@
-	$(PERL) data/convert_map.pl $< > $@
+	echo '<code_set_name> "$(@:.cm=)"' > $@
+	$(PERL) data/convert_map.pl $< >> $@
 
 $(ROOTDATA):	$(ROOTLOCDIRS) $(ROOTCATDIRS) $(DATA)
 	$(RM) $@
